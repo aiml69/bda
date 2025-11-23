@@ -1,0 +1,37 @@
+mapper.py
+#!/usr/bin/env python
+ import sys
+for line in sys.stdin:
+ # Remove leading and trailing whitespace
+ line = line.strip()
+ # Split the line into columns
+ columns = line.split()
+ # Extract the salary column
+ if len(columns)==3:
+ salary = columns[2]
+ # Output the salary with a null key
+ print(f"None\t{salary}")
+
+
+
+reducer.py
+
+import sys
+# Initialize the maximum salary to 0
+max_salary = 0
+# Iterate over each line in the input
+for line in sys.stdin:
+ # Split the line into key and value
+ key, value = line.strip().split('\t', 1)
+
+ # Convert the value to an integer
+ try:
+ salary = int(value)
+ except ValueError:
+ continue
+
+ # Update the maximum salary if this salary is higher
+ if salary > max_salary:
+ max_salary = salary
+# Output the final maximum salary
+print(f"Max Salary: {max_salary}")
