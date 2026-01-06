@@ -1,5 +1,5 @@
 mapper.py
-#!/usr/bin/env python
+
 import sys
 import csv
 for line in csv.reader(iter(sys.stdin.readline, '')):
@@ -7,19 +7,17 @@ for line in csv.reader(iter(sys.stdin.readline, '')):
  year = line[0]
  sales = line[2] # Get just the sales amount
  try:
- # Verify it's a valid number
  sales_value = int(sales)
  print(f"{year}\t{sales_value}")
 
 
 
 reducer.py
-#!/usr/bin/env python
+
 import sys
 current_year = None
 total_sales = 0
 for line in sys.stdin:
- # Split the input into year and sales
  year, sales = line.strip().split('\t')
 
  if current_year is None:
@@ -28,10 +26,8 @@ for line in sys.stdin:
  if year == current_year:
  total_sales += int(sales)
  else:
- # Print total for the year and reset for next year
  print(f"{current_year}\t{total_sales}")
  current_year = year
  total_sales = int(sales)
-# Print the last year's total
 if current_year is not None:
  print(f"{current_year}\t{total_sales}")
