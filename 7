@@ -7,7 +7,7 @@ customer_data.shape
 customer_data.head()
 data = customer_data.iloc[:, 3:5].values
 data
-importscipy.cluster.hierarchy as shc
+import scipy.cluster.hierarchy as shc
 plt.figure(figsize=(10, 7))
 plt.title("Customer Dendograms")
 dend = shc.dendrogram(shc.linkage(data, method='ward'))
