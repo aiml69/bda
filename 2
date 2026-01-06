@@ -1,34 +1,24 @@
 mapper.py
-#!/usr/bin/env python
+
 import sys
-# Input format: employee_id, name,salary
 for line in sys.stdin:
-# Split the input line into fields
 fields = line.strip().split(",")
-# Check that the input line has the correct number of fields
 if len(fields) != 3:
 continue
-# Extract the salary from the input line
 salary = int(fields[2])
-# Emit the salary as the output key and a count of 1 asthe output value
 print("{0}\t{1}".format(salary, 1))
 
 
 
 reducer.py
-#!/usr/bin/env python
+
 import sys
-# Initialize variables to hold the sum ofsalaries and the count of employees
 total_salary = 0
 employee_count = 0
-# Process input from mapper
 for line in sys.stdin:
-# Split the input line into key and value
 salary, count = line.strip().split('\t')
-# Update the sum ofsalaries and the count of employees
 total_salary += int(salary) * int(count)
 employee_count += int(count)
-# Calculate the average salary
  if employee_count > 0:
  average_salary = total_salary / employee_count # Output the result
  print("Average salary: {0}".format(average_salary))
